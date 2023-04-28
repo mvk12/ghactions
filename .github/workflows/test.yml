@@ -25,3 +25,8 @@ jobs:
           title: "Pushed to ${{ github.repository }}"
           description: "Pushed ${{ github.repository }} on ${{ github.ref }}"
           color: 0x00dd00
+      - name: Notify if fails
+        uses: sarisia/actions-status-discord@v1
+        if: ${{ !(failure() || cancelled() )}}
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
