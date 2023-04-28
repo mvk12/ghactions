@@ -8,19 +8,11 @@ on:
       - opened
       - reopened
 jobs:
-  print_context:
+  discord-notify:
     if: >-
       github.event.pull_request.user.login != 'octobot' &&
       github.event.pull_request.user.login != 'dependabot[bot]'
     runs-on: ubuntu-latest
-    steps:
-      - env:
-          EVENT_CONTEXT: ${{ toJSON(github.event) }}
-        run: |
-          echo $EVENT_CONTEXT
-  discord-notify:
-    runs-on: ubuntu-latest
-    needs: print_context
     steps:
       - name: Simple Discord notification
         uses: sarisia/actions-status-discord@v1
@@ -28,5 +20,5 @@ jobs:
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           title: "${{ github.event.pull_request.title }}"
-          content: "${{ github.event.pull_request.commits }} commit(s): ${{ github.event.pull_request.changed_files }} changed file(s) with ${{ github.event.pull_request.additions }} addition(s) and ${{ github.event.pull_request.deletions }} deletion(s)"
+          content: "**${{ github.event.pull_request.title }}**\n${{ github.event.pull_request.commits }} commit(s): ${{ github.event.pull_request.changed_files }} changed file(s) with ${{ github.event.pull_request.additions }} addition(s) and ${{ github.event.pull_request.deletions }} deletion(s)"
 

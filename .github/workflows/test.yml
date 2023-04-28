@@ -1,5 +1,5 @@
 name: Job test
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+run-name: ${{ github.actor }} added new changes 🚀
 on:
   push:
     branches:
@@ -21,7 +21,7 @@ jobs:
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           status: ${{ job.status }}
-          content: "Hey <@${{ secrets.DISCORD_ME }}> and <@here>!"
+          content: "Hey <@${{ secrets.DISCORD_ME }}> and @here!"
           title: "Pushed to ${{ github.repository }}"
           description: "Pushed ${{ github.repository }} on ${{ github.ref }}"
           color: 0x00dd00
