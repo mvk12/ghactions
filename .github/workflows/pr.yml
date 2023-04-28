@@ -1,5 +1,5 @@
-name: PR Test
-run-name: PR opened/reopened by ${{ github.actor }} 🚀
+name: PR activity
+run-name: PR activity by ${{ github.actor }} 🚀
 on:
   pull_request:
     branches:
@@ -8,10 +8,11 @@ on:
       - opened
       - reopened
 jobs:
-  discord-notify:
+  notify-opened-or-reopened:
     if: >-
       github.event.pull_request.user.login != 'octobot' &&
-      github.event.pull_request.user.login != 'dependabot[bot]'
+      github.event.pull_request.user.login != 'dependabot[bot]' &&
+      (github.event.action == 'opened' || github.event.action == 'reopened')
     runs-on: ubuntu-latest
     steps:
       - name: Simple Discord notification
@@ -21,4 +22,3 @@ jobs:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           title: "${{ github.event.pull_request.title }}"
           content: "**${{ github.event.pull_request.title }}**\n${{ github.event.pull_request.commits }} commit(s): ${{ github.event.pull_request.changed_files }} changed file(s) with ${{ github.event.pull_request.additions }} addition(s) and ${{ github.event.pull_request.deletions }} deletion(s)"
-
