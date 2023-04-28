@@ -17,7 +17,7 @@ jobs:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Complex Discord notification
         uses: sarisia/actions-status-discord@v1
-        if: failure() || cancelled()
+        if: always()
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           status: ${{ job.status }}
@@ -27,8 +27,9 @@ jobs:
           color: 0x00dd00
       - name: Notify if fails
         uses: sarisia/actions-status-discord@v1
-        if: ${{ !(failure() || cancelled() )}}
+        if: failure() || cancelled()
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           status: ${{ job.status }}
           content: "@here Hurry up!"
+          description: "Puede que esto necesite de su atención"
