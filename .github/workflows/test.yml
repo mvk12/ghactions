@@ -17,21 +17,17 @@ jobs:
   Notify-Discord:
     runs-on: ubuntu-latest
     steps:
-      - name: Simple Discord notification
-        uses: sarisia/actions-status-discord@v1
-        if: always()
-        with:
-          webhook: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Complex Discord notification
         uses: sarisia/actions-status-discord@v1
         if: always()
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           status: ${{ job.status }}
-          content: "Hey <@${{ secrets.DISCORD_ME }}> and @here! ${{ github.job }}"
+          content: "Hey <@${{ secrets.DISCORD_ME }}> and @here!"
           title: "Pushed to ${{ github.repository }}"
-          description: "Pushed ${{ github.repository }} on ${{ github.ref }}"
+          description: "Pushed ${{ github.repository }} on ${{ github.ref_name }}"
           color: 0x00dd00
+          url: ${{ github.event.compare }}
       - name: Notify if fails
         uses: sarisia/actions-status-discord@v1
         if: failure() || cancelled()
@@ -39,4 +35,4 @@ jobs:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           status: ${{ job.status }}
           content: "@here Hurry up!"
-          description: "Puede que esto necesite de su atención"
+          description: "Puede que este job ${{ github.job }} necesite de su atención"
