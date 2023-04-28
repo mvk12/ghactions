@@ -25,7 +25,7 @@ jobs:
           status: ${{ job.status }}
           content: "Hey <@${{ secrets.DISCORD_ME }}> and @here!"
           title: "Pushed to ${{ github.repository }}"
-          description: "Pushed ${{ github.repository }} on ${{ github.ref_name }}"
+          description: "Pushed ${{ github.repository }} on ${{ github.ref_name }} [See more](${{ github.event.repository.url }}/actions/runs/${{ github.run_id }})"
           color: 0x00dd00
           url: ${{ github.event.compare }}
       - name: Notify if fails
