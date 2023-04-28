@@ -1,19 +1,12 @@
 name: Job test
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+run-name: ${{ github.actor }} added new changes 🚀
 on:
   push:
     branches:
       - main
-      - feature/*
+      - feat/*
       - fix/*
 jobs:
-  print_context:
-    runs-on: ubuntu-latest
-    steps:
-      - env:
-          EVENT_CONTEXT: ${{ toJSON(github.event) }}
-        run: |
-          echo $EVENT_CONTEXT
   Notify-Discord:
     runs-on: ubuntu-latest
     steps:
@@ -28,9 +21,7 @@ jobs:
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           status: ${{ job.status }}
-          content: "Hey <@${{ secrets.DISCORD_ME }}>!"
-          title: "Pushed ${{ github.repository }}"
+          content: "Hey <@${{ secrets.DISCORD_ME }}> and @here!"
+          title: "Pushed to ${{ github.repository }}"
           description: "Pushed ${{ github.repository }} on ${{ github.ref }}"
-          image: https://www.lirmi.com/hubfs/IMAGOTIPO-COLOR.svg
           color: 0x00dd00
-          avatar_url: https://www.lirmi.com/hubfs/IMAGOTIPO-COLOR.svg
