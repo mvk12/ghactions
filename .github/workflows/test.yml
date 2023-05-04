@@ -3,7 +3,6 @@ run-name: ${{ github.actor }} added new changes 🚀
 on:
   push:
     branches:
-      - main
       - feat/*
       - fix/*
 jobs:
