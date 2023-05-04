@@ -5,15 +5,13 @@ on:
     tags:
       - v*
 jobs:
-  print_context:
+  notify:
     runs-on: ubuntu-latest
     steps:
-      - env:
-          EVENT_CONTEXT: ${{ toJSON(github) }}
-        run: |
-          echo $EVENT_CONTEXT
       - name: Simple Discord notification
         uses: sarisia/actions-status-discord@v1
         if: always()
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          content: 'New version is released! ${{ github.repository }}/${{ github.ref_name }}'
+          url: "${{ github.event.repository.url }}/releases/tag/${{ github.ref_name }}"
