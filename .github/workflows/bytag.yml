@@ -14,5 +14,5 @@ jobs:
         if: always()
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          content: "**New version is released!**\n${{ github.ref_name }} in ${{ github.repository }}"
+          content: "**Deployed!** ${{ github.repository }} - ${{ github.ref_name }}"
           url: "${{ github.event.repository.url }}/releases/tag/${{ github.ref_name }}"
