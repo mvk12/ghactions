@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - v*
+  workflow_dispatch:
 jobs:
   notify:
     runs-on: ubuntu-latest
@@ -13,5 +14,5 @@ jobs:
         if: always()
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          content: 'New version is released! ${{ github.repository }}/${{ github.ref_name }}'
+          content: "**New version is released!**\n${{ github.ref_name }} in ${{ github.repository }}"
           url: "${{ github.event.repository.url }}/releases/tag/${{ github.ref_name }}"
