@@ -1,11 +1,9 @@
 name: Deploy by Tag
-
+run-name: ${{ github.actor }} upload new tag
 on:
   push:
     tags:
-      - 'v*'
-  workflow_dispatch:
-
+      - v*
 jobs:
   print_context:
     runs-on: ubuntu-latest
