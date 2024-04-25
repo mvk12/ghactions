@@ -7,21 +7,21 @@ on:
       - feat/*
       - fix/*
 jobs:
-  print_context:
+  print-context:
     runs-on: ubuntu-latest
     steps:
       - env:
           EVENT_CONTEXT: ${{ toJSON(github) }}
         run: |
           echo $EVENT_CONTEXT
-  Notify-Discord:
+  discord-notification:
     runs-on: ubuntu-latest
     steps:
       - name: Complex Discord notification
         uses: sarisia/actions-status-discord@v1
         if: always()
         with:
-          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          webhook: ${{ secrets.DISCORD_WEBHOOK_REPOSITORY_CHANGES }}
           status: ${{ job.status }}
           content: "Hey <@${{ secrets.DISCORD_ME }}> and @here!"
           title: "Pushed to ${{ github.repository }}"
@@ -32,7 +32,7 @@ jobs:
         uses: sarisia/actions-status-discord@v1
         if: failure() || cancelled()
         with:
-          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          webhook: ${{ secrets.DISCORD_WEBHOOK_REPOSITORY_CHANGES }}
           status: ${{ job.status }}
           content: "@here Hurry up!"
           description: "Puede que este job ${{ github.job }} necesite de su atención"

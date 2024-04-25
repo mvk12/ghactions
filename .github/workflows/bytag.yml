@@ -13,6 +13,6 @@ jobs:
         uses: sarisia/actions-status-discord@v1
         if: always()
         with:
-          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          webhook: ${{ secrets.DISCORD_RELEASES_WEEBHOOK }}
           content: "**Deployed!** ${{ github.repository }} - ${{ github.ref_name }}"
           url: "${{ github.event.repository.url }}/releases/tag/${{ github.ref_name }}"
