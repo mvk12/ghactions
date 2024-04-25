@@ -8,8 +8,5 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "asciify-image": "^0.1.10"
-  }
+  "license": "ISC"
 }

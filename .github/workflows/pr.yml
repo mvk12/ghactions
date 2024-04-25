@@ -15,7 +15,7 @@ jobs:
       (github.event.action == 'opened' || github.event.action == 'reopened')
     runs-on: ubuntu-latest
     steps:
-      - name: Simple Discord notification
+      - name: Discord notification
         uses: sarisia/actions-status-discord@v1
         if: always()
         with:
